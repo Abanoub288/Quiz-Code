@@ -1,0 +1,39 @@
+<div class="quiz-app">
+  <div class="quiz-info d-flex justify-content-between align-items-center">
+    <select class="btn btn-outline-primary" (change)="filterCategory($event)">
+      <option class="text-bg-light p-3" [value]="cate" *ngFor="let cate of qCategories">{{cate}}</option>
+    </select>
+    <div class="count">Questions Count: <span>{{ this.currentIndex+1 }}</span></div>
+  </div>
+  <div #answersArea class="answers-area">
+    <div *ngIf="questions.length > 0">
+      <h4>{{ questions[currentIndex].title }}</h4>
+      <div class="answer">
+        <input type="radio" class="form-check-input" id="answer-1" name="question" [value]="questions[currentIndex].answer_1">
+        <label for="answer-1">{{ questions[currentIndex].answer_1 }}</label>
+      </div>
+      <div class="answer">
+        <input type="radio" class="form-check-input" id="answer-2" name="question" [value]="questions[currentIndex].answer_2">
+        <label for="answer-2">{{ questions[currentIndex].answer_2 }}</label>
+      </div>
+      <div class="answer">
+        <input type="radio" class="form-check-input" id="answer-3" name="question" [value]="questions[currentIndex].answer_3">
+        <label for="answer-3">{{ questions[currentIndex].answer_3 }}</label>
+      </div>
+      <div class="answer">
+        <input type="radio" class="form-check-input" id="answer-4" name="question" [value]="questions[currentIndex].answer_4">
+        <label for="answer-4">{{ questions[currentIndex].answer_4 }}</label>
+      </div>
+    </div>
+  </div>
+  <button #submitAnswer class="submit-button" (click)="onSubmit()">Next</button>
+  <div #bullets class="bullets">
+    <div class="spans">
+      <span *ngFor="let _ of questions; let i = index" [attr.data-index]="i"></span>
+    </div>
+  </div>
+  <div *ngIf="showResultsContainer" [ngClass]="getResultClass()" class="ResultsContainer">
+    Total: <span [innerHTML]="resultMessage"></span>
+  </div>
+</div>
+
